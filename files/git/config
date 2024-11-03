@@ -1,0 +1,6 @@
+{
+  user = {
+    name = "Quentin Machu";
+    email = "quentin@bitmex.com";
+  };
+}

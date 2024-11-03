@@ -1,0 +1,87 @@
+{
+  "nodes": {
+    "homemanager": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1726989464,
+        "narHash": "sha256-Vl+WVTJwutXkimwGprnEtXc/s/s8sMuXzqXaspIGlwM=",
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "rev": "2f23fa308a7c067e52dfcc30a0758f47043ec176",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "ref": "release-24.05",
+        "repo": "home-manager",
+        "type": "github"
+      }
+    },
+    "nixdarwin": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1730560543,
+        "narHash": "sha256-Ny8bMwoQH2JmLr2/+Zqer1Aizk5nCIXLPGUL1YyFS3I=",
+        "owner": "LnL7",
+        "repo": "nix-darwin",
+        "rev": "e56d80b28314643da5a0a27c6371c0682ab8389f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "LnL7",
+        "ref": "master",
+        "repo": "nix-darwin",
+        "type": "github"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1730536648,
+        "narHash": "sha256-liSPk8LHIaE4szk6W9y4BBQ92jfu9QgnscYpl5RTiKk=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "4df2561800d1fb1be56d9d71cddb9a1079b688c2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "release-24.05",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nurpkgs": {
+      "locked": {
+        "lastModified": 1730565856,
+        "narHash": "sha256-B+0LTC2ofNwu1d2KP8EJOMSHGC436Mbcxqko4JkqXuY=",
+        "owner": "nix-community",
+        "repo": "NUR",
+        "rev": "d222b47cb95ed657e013c38c8fb2b3bf8b65d51f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "NUR",
+        "type": "github"
+      }
+    },
+    "root": {
+      "inputs": {
+        "homemanager": "homemanager",
+        "nixdarwin": "nixdarwin",
+        "nixpkgs": "nixpkgs",
+        "nurpkgs": "nurpkgs"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}

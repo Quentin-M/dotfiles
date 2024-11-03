@@ -1,0 +1,31 @@
+# Base module
+zmodule environment
+zmodule git
+zmodule input
+zmodule termtitle
+zmodule utility
+
+# Theme
+zmodule romkatv/powerlevel10k
+
+# Syntax highlighting.
+zmodule zdharma-continuum/fast-syntax-highlighting
+
+# Completion
+## Additional completion definitions for Zsh.
+zmodule zsh-users/zsh-completions
+
+## Enables and configures smart and extensive tab completion. Must be loaded _after_ all completion definitions.
+zmodule completion
+
+## Completes commands with TAB using fzf. Run build-fzf-tab-module to make coloring fast.
+zmodule Aloxaf/fzf-tab
+
+## fzf-driven CTRL-r
+zmodule joshskidmore/zsh-fzf-history-search
+
+## Up/down-arrows history search
+zmodule zsh-users/zsh-history-substring-search
+
+## Autosuggestions (in gray) when typing commands
+zmodule zsh-users/zsh-autosuggestions
