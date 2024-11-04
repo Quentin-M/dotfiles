@@ -5,12 +5,10 @@ let
         "/Applications/Brave Browser.app"
         "/System/Applications/Mail.app"
         "/Applications/ChatGPT.app"
-        "/Applications/Microsoft OneNote.app"
         "/Applications/Obsidian.app"
         "/Applications/Visual Studio Code.app"
         "/Applications/iTerm.app"
         "/Applications/Monodraw.app"
-        "/Applications/Raycast.app"
         "/Applications/Bruno.app"
     ];
 
@@ -21,14 +19,12 @@ let
         "/System/Applications/Mail.app"
         "/Applications/Slack.app"
         "/Applications/ChatGPT.app"
-        "/Applications/Microsoft OneNote.app"
         "/Applications/Obsidian.app"
         "/Applications/Visual Studio Code.app"
         "/Applications/iTerm.app"
         "/Applications/Postico 2.app"
         "/Applications/TablePlus.app"
         "/Applications/Monodraw.app"
-        "/Applications/Raycast.app"
         "/Applications/Bruno.app"
     ];
 
