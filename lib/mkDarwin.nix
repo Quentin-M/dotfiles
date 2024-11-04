@@ -1,5 +1,5 @@
 { inputs }:
-{ system, user, home ? "/Users/${user}" }:
+{ system, user, home ? "/Users/${user}", isPro ? false }:
 
 let
   # Nixpkgs Overlays
@@ -11,7 +11,7 @@ let
 
 in inputs.nixdarwin.lib.darwinSystem {
   inherit system;
-  specialArgs = { inherit inputs user; };
+  specialArgs = { inherit inputs user isPro; };
 
   modules = [
     # Nix-darwin configuration

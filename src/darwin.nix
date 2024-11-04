@@ -4,6 +4,7 @@
 {
   pkgs,
   user,
+  isPro,
   ...
 }: {
   # Nix Daemon & Nix auto-update.
@@ -21,64 +22,10 @@
   # Homebrew
   homebrew = {
     enable = true;
-    brews = [
-      "mas" # let nix install mac app store apps
-      "pam-reattach" # used to enable pam touchid in tmux
-      "ykman" # yubikey tool
-      "aws-shell"
-      ## bitmex ##
-      "git"
-      "step"
-      "kubelogin"
-      # (api build deps)
-      "pkg-config"
-      "cairo"
-      "pango"
-      "libpng"
-      "jpeg"
-      "giflib"
-      "librsvg"
-      "pixman"
-    ];
+    brews = import ../conf/pkgs/brews.nix { inherit isPro; };
+    casks = import ../conf/pkgs/casks.nix { inherit isPro; };
+    masApps = import ../conf/pkgs/mas.nix { inherit isPro; };
 
-    casks = [
-      "brave-browser"
-      "iterm2"
-      "microsoft-onenote"
-      "tailscale"
-      "anydesk"
-      "cleanshot"
-
-      "zoom"
-      "slack"
-      "discord"
-      "chatgpt"
-
-      "orbstack"
-      "visual-studio-code"
-      "postico"
-      "tableplus"
-
-      #"1password" (was outdated)
-      "1password-cli"
-
-      "raycast"
-      "monodraw"
-      "insomnia"
-
-      "jordanbaird-ice"
-      "loop"
-      "stats"
-
-      "eddie"
-      "keka"
-      "vlc"
-      "grandperspective"
-      "hashicorp/tap/hashicorp-vagrant"
-      "virtualbox"
-    ];
-
-    masApps = {};
     onActivation.cleanup = "zap";
     global.autoUpdate = false;
   };
@@ -92,18 +39,7 @@
       orientation = "bottom";
       showhidden = true;
       show-recents = true;
-      persistent-apps = [
-        "/Applications/Brave Browser.app"
-        "/System/Applications/Mail.app"
-        "/Applications/Slack.app"
-        "/Applications/ChatGPT.app"
-        "/Applications/Microsoft OneNote.app"
-        "/Applications/Visual Studio Code.app"
-        "/Applications/iTerm.app"
-        "/Applications/Monodraw.app"
-        "/Applications/Raycast.app"
-        "/Applications/Insomnia.app"
-      ];
+      persistent-apps = import ../conf/pkgs/dock.nix { inherit isPro; };
       persistent-others = [
         "/Users/${user}/Downloads/"
       ];

@@ -92,15 +92,15 @@ in with pkgs; {
       export ZSH_CACHE_DIR=~/.cache
       export LANG=en_US.UTF-8
     '';
-    initExtra = builtins.readFile ../files/zsh/zshrc;
+    initExtra = builtins.readFile ../conf/zsh/zshrc;
   };
-  xdg.configFile."zsh/.zimrc".source = ../files/zsh/zimrc;
-  xdg.configFile."zsh/.p10k.zsh".source = ../files/zsh/p10k.zsh;
+  xdg.configFile."zsh/.zimrc".source = ../conf/zsh/zimrc;
+  xdg.configFile."zsh/.p10k.zsh".source = ../conf/zsh/p10k.zsh;
 
   # Tmux
   programs.tmux = {
     enable = true;
-    extraConfig = builtins.readFile ../files/tmux.conf;
+    extraConfig = builtins.readFile ../conf/tmux.conf;
   };
   home.file.".tmux/plugins/tpm" = {
     source = builtins.fetchGit {
@@ -127,11 +127,11 @@ in with pkgs; {
         push = { default = "current"; };
         pull = { rebase = true; };
         rebase = { "autosquash" = true; };
-      } // import ../files/git/config;
+      } // import ../conf/git/config;
     aliases = {
       fix = "!git log -n 50 --pretty=format:'%h %s' --no-merges | fzf | xargs -o git commit --fixup";
     };
-    ignores = lib.splitString "\n" (builtins.readFile ../files/git/ignore);
+    ignores = lib.splitString "\n" (builtins.readFile ../conf/git/ignore);
   };
 
   # SSH
@@ -163,5 +163,5 @@ in with pkgs; {
     viAlias = true;
     vimAlias = true;
   };
-  home.file.".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/nixpkgs/files/nvim";
+  home.file.".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/nixpkgs/conf/nvim";
 }

@@ -1,5 +1,5 @@
 { inputs }:
-{ system, user, home ? "/home/${user}" }:
+{ system, user, home ? "/home/${user}", isPro ? false }:
 
 let
   # Nixpkgs Overlays
