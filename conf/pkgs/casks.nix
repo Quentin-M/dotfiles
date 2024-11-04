@@ -6,7 +6,7 @@ let
         "iterm2"
         "microsoft-onenote"
         "tailscale"
-        "cleanshot"
+        "shottr"
         "chatgpt"
         "orbstack"
         "visual-studio-code"
@@ -23,6 +23,7 @@ let
         "keka"
         "vlc"
         "grandperspective"
+        "obsidian"
     ];
 
     home = [
