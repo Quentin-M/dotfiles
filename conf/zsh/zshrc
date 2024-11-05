@@ -189,6 +189,9 @@ alias cat=bat
 alias tmux-re='tmux source ~/.config/tmux/tmux.conf'
 tmux-ti() { echo -ne "\033k$1\007" } # sets the title of the tab/window
 
+## Weechat
+export WEECHAT_HOME=~/.config/weechat 
+
 ###############################################################################
 
 if [[ $OSTYPE == 'darwin'* ]]; then

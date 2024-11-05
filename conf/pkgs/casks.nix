@@ -21,7 +21,7 @@ let
         "loop"
         "stats"
         "keka"
-        "vlc"
+        "iina"
         "grandperspective"
         "obsidian"
     ];

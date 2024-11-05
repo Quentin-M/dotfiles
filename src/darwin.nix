@@ -37,7 +37,7 @@
       autohide = true;
       mru-spaces = false;
       orientation = "bottom";
-      showhidden = true;
+      showhidden = false;
       show-recents = true;
       persistent-apps = import ../conf/pkgs/dock.nix { inherit isPro; };
       persistent-others = [
