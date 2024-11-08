@@ -29,6 +29,7 @@ let
       "discord"
       "anydesk"
       "eddie"
+      "netnewswire"
       "hashicorp/tap/hashicorp-vagrant"
       "virtualbox"
     ];
