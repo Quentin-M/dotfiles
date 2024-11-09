@@ -43,6 +43,7 @@
     git
     git-crypt
     delta
+    choose
     awscli2
     mise
     kubectl
@@ -66,10 +67,6 @@
 
   packagesNodes = with pkgs.nodePackages; [];
 
-  packagesGit = with pkgs.gitAndTools; [
-    delta
-  ];
-
   packagesPython = with pkgs.python310Packages; [
     pip
     requests
@@ -80,7 +77,7 @@ in
     programs.home-manager.enable = true;
     home = {
       stateVersion = "24.05";
-      packages = packages ++ packagesNodes ++ packagesGit ++ packagesPython;
+      packages = packages ++ packagesNodes ++ packagesPython;
     };
 
     # Nix-index
@@ -126,14 +123,14 @@ in
             side-by-side = true;
             syntax-theme = true;
           };
-          merge = {conflictstyle = "diff3";};
+          merge = {conflictstyle = "zdiff3";};
           push = {default = "current";};
           pull = {rebase = true;};
           rebase = {"autosquash" = true;};
         }
         // import ../conf/git/config;
       aliases = {
-        fix = "!git log -n 50 --pretty=format:'%h %s' --no-merges | fzf | xargs -o git commit --fixup";
+        fix = "!git log -n 50 --pretty=format:'%h %s' --no-merges | fzf | choose 0 | xargs -o git commit --fixup";
       };
       ignores = lib.splitString "\n" (builtins.readFile ../conf/git/ignore);
     };
