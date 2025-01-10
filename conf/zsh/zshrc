@@ -165,6 +165,15 @@ fi
   asdf install zls latest && asdf global zls latest
 } 2>&1 > /dev/null &)
 
+#
+# tenv
+#
+
+if [ ! -f ~/.tenv.completion.zsh ]; then
+  tenv completion zsh > ~/.tenv.completion.zsh
+fi
+source ~/.tenv.completion.zsh
+
 ###############################################################################
 ###############################################################################
 ###############################################################################

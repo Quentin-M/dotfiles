@@ -6,7 +6,7 @@ let
         "iterm2"
         "microsoft-onenote"
         "tailscale"
-        "shottr"
+        "cleanshot"
         "chatgpt"
         "orbstack"
         "visual-studio-code"

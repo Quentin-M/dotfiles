@@ -47,8 +47,6 @@
     asdf-vm
     kubectl
     kubectx
-    tfswitch
-    tgswitch
 
     mtr
     ipcalc

@@ -14,7 +14,7 @@ git clone git@github.com:Quentin-M/dotfiles.git ~/.config/nixpkgs
 - Start and set `Launch on login`
   - Loop
   - Ice
-  - Shottr
+  - Cleanshot X
   - Raycast
   - Stats
 
