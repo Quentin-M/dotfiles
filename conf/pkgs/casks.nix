@@ -4,7 +4,6 @@ let
     common = [
         "brave-browser"
         "iterm2"
-        "microsoft-onenote"
         "tailscale"
         "cleanshot"
         "chatgpt"

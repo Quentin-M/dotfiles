@@ -53,6 +53,8 @@ setopt HIST_IGNORE_ALL_DUPS # Remove older command from the history if a duplica
 setopt CORRECT # Prompt for spelling correction of commands.
 SPROMPT='zsh: correct %F{red}%R%f to %F{green}%r%f [nyae]? ' # Customize spelling correction prompt.
 bindkey -e # Set editor default keymap to emacs (`-e`) or vi (`-v`)
+unsetopt inc_append_history # Wait for shell exit before appending to hitory
+unsetopt share_history # Don't share history across tabs
 
 # --------------------
 # Module configuration
