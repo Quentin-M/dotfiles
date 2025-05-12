@@ -145,26 +145,16 @@ eval $(thefuck --alias f)
 export THEFUCK_REQUIRE_CONFIRMATION="false"
 
 #
-# Asdf
+# Mise
 #
 
-export PATH="$HOME/.asdf/shims:$PATH"
-
-if [[ -e $HOME/.asdf/installs/go/ ]]; then
-  export GOROOT=$HOME/.asdf/installs/go/$(grep "go" /Users/qmachu/.tool-versions | awk '{print $2}')/go
-  export GOPATH=$HOME/Workspace/go/
-  export PATH="$PATH:$GOPATH/bin:$GOROOT/bin"
-fi
+eval "$(mise activate zsh)"
+export GOPATH=$HOME/Workspace/go/
+export PATH="$PATH:$GOPATH/bin:$GOROOT/bin"
 
 ({
-  asdf plugin add zls https://github.com/dochang/asdf-zls.git
-  asdf plugin-add zig https://github.com/asdf-community/asdf-zig.git
-  asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
-  asdf plugin add golang https://github.com/asdf-community/asdf-golang.git
-  asdf install golang latest && asdf global golang latest
-  asdf install nodejs latest && asdf global nodejs latest
-  asdf install zig latest && asdf global zig latest
-  asdf install zls latest && asdf global zls latest
+  mise use -g node
+  mise use -g go
 } 2>&1 > /dev/null &)
 
 ###############################################################################

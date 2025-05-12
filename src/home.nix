@@ -44,7 +44,7 @@
     git-crypt
     delta
     awscli2
-    asdf-vm
+    mise
     kubectl
     kubectx
 
