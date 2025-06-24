@@ -55,6 +55,7 @@
     dogdns
     thefuck
     git
+
     awscli2
     mise
     kubectl
@@ -65,10 +66,16 @@
     ipcalc
     ipmitool
     htop
-    lnav
     jq
     pgcli
     weechat
+
+    # nvim's nix package
+    nixd
+    alejandra
+    deadnix
+    statix
+    tree-sitter
   ];
 
   packagesNodes = with pkgs.nodePackages; [];

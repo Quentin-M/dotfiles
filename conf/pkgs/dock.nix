@@ -19,7 +19,6 @@ let
         "/System/Applications/Calendar.app"
         "/System/Applications/Mail.app"
         "/Applications/Slack.app"
-        "/Applications/ChatGPT.app"
         "/Applications/Obsidian.app"
         "/Applications/Visual Studio Code.app"
         "/Applications/iTerm.app"

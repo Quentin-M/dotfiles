@@ -23,6 +23,7 @@ let
         "iina"
         "grandperspective"
         "obsidian"
+        "passepartout"
     ];
 
     home = [
