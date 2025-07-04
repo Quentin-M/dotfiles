@@ -8,7 +8,9 @@ let
         "ykman"
     ];
 
-    home = [];
+    home = [
+        "wireguard-tools"
+    ];
 
     pro = [
         "step"
