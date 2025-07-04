@@ -1,4 +1,12 @@
 # -----------------
+# Zprof - Use `time ZSH_PROF=1 zsh -i -c exit` to profile startup time
+# -----------------
+
+if [ -n "${ZSH_PROF+1}" ]; then
+    zmodload zsh/zprof
+fi
+
+# -----------------
 # Nix
 # -----------------
 
@@ -12,7 +20,6 @@ fi
 
 if [[ $OSTYPE == 'darwin'* ]]; then
   export PATH="/usr/local/sbin:/opt/homebrew/bin:$PATH"
-  #export PATH="/opt/homebrew/opt/openssl@3/bin:$PATH" # maybe needed?
 fi
 
 # -----------------
@@ -27,85 +34,58 @@ if [[ -z "$TMUX" ]]; then
   fi
   # Only run tmux on demand (due to latency when overseas)
   alias tm='tmux $ZSH_TMUX_OPTS -u new -A -D -t iterm2'
+  alias tmux-re='tmux source ~/.config/tmux/tmux.conf'
+  tmux-ti() { echo -ne "\033k$1\007" } # sets the title of the tab/window
 fi
 
 # -----------------
-# Powerlevel10k + Instant Prompt
+# Mise
 # -----------------
 
-# Load P10k configuration.
-source ~/.config/zsh/.p10k.zsh
+# should already be activated in zimrc
+# eval "$(mise activate zsh)"
 
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.config/zsh/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
-# -----------------
-# Zsh configuration
-# -----------------
-
-WORDCHARS=${WORDCHARS//[\/]} # Remove path separator from WORDCHARS.
-setopt globdots # Show hidden folders in completions
-setopt HIST_IGNORE_ALL_DUPS # Remove older command from the history if a duplicate is to be added.
-setopt CORRECT # Prompt for spelling correction of commands.
-SPROMPT='zsh: correct %F{red}%R%f to %F{green}%r%f [nyae]? ' # Customize spelling correction prompt.
-bindkey -e # Set editor default keymap to emacs (`-e`) or vi (`-v`)
-unsetopt inc_append_history # Wait for shell exit before appending to hitory
-unsetopt share_history # Don't share history across tabs
+export GOPATH=$HOME/Workspace/go/
+export PATH="$PATH:$GOPATH/bin:$GOROOT/bin"
+({
+  mise use -g node
+  mise use -g go
+} 2>&1 > /dev/null &)
 
 # --------------------
 # Module configuration
 # --------------------
 
-# zsh-autosuggestions
-#
-# Disable automatic widget re-binding on each precmd. This can be set when
-# zsh-users/zsh-autosuggestions is the last module in your ~/.zimrc.
-ZSH_AUTOSUGGEST_MANUAL_REBIND=1
-
 # zsh-history-substring-search
-export HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND=bg=025,fg=white,bold
+# export HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND=bg=025,fg=white,bold
 
 # zsh-fzf-history-search (copying fzf-tab's lib/-ftb-fzf)
-export ZSH_FZF_HISTORY_SEARCH_FZF_EXTRA_ARGS="--layout=reverse --print-query --tiebreak=begin --height=${FZF_TMUX_HEIGHT:=$(( lines > LINES / 3 * 2 ? LINES / 3 * 2 : lines ))} --color=hl:075,hl+:075,bg+:025 --ansi --delimiter=\x00 --cycle"
+# export ZSH_FZF_HISTORY_SEARCH_FZF_EXTRA_ARGS="--layout=reverse --print-query --tiebreak=begin --height=${FZF_TMUX_HEIGHT:=$(( lines > LINES / 3 * 2 ? LINES / 3 * 2 : lines ))} --color=hl:075,hl+:075,bg+:025 --ansi --delimiter=\x00 --cycle"
 
 # fzf-tab
-zstyle ':fzf-tab:*' fzf-flags --color=hl:075,hl+:075,bg+:025
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
-zstyle ':completion:*:*:*:*:processes' command "ps -u $USER -o pid,user,comm -w -w"
-zstyle ':fzf-tab:complete:(kill|ps):argument-rest' fzf-preview '[[ $group == "[process ID]" ]] && ps --pid=$word -o cmd --no-headers -w -w'
-zstyle ':fzf-tab:complete:(kill|ps):argument-rest' fzf-flags --preview-window=down:3:wrap
-zstyle ':fzf-tab:complete:systemctl-*:*' fzf-preview 'SYSTEMD_COLORS=1 systemctl status $word'
-zstyle ':fzf-tab:complete:(-command-|-parameter-|-brace-parameter-|export|unset|expand):*' fzf-preview 'echo ${(P)word}'
-
-# Completions (which do not work natively in .zimrc)
-if [[ ! -f ~/.cache/completions/_kubectl ]]; then
-  mkdir -p ~/.cache/completions
-  kubectl completion zsh > ~/.cache/completions/_kubectl
-fi
-export fpath=(~/.cache/completions $fpath)
+# zstyle ':fzf-tab:*' fzf-flags --color=hl:075,hl+:075,bg+:025
+# zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
+# zstyle ':fzf-tab:complete:systemctl-*:*' fzf-preview 'SYSTEMD_COLORS=1 systemctl status $word'
+# zstyle ':fzf-tab:complete:(-command-|-parameter-|-brace-parameter-|export|unset|expand):*' fzf-preview 'echo ${(P)word}'
 
 # ------------------
-# Initialize zim
+# ZSH / Zim
 # ------------------
+
+WORDCHARS=${WORDCHARS//[\/]} # Remove path separator from WORDCHARS.
+unsetopt share_history # Don't share history across tabs
+setopt globdots # Show hidden folders in completions
+setopt HIST_IGNORE_ALL_DUPS # Remove older command from the history if a duplicate is to be added.
+setopt CORRECT # Prompt for spelling correction of commands.
+SPROMPT='zsh: correct %F{red}%R%f to %F{green}%r%f [nyae]? ' # Customize spelling correction prompt.
 
 ZIM_HOME=${ZDOTDIR}/.zim
-# Download zimfw plugin manager if missing.
 if [[ ! -e ${ZIM_HOME}/zimfw.zsh ]]; then
-  if (( ${+commands[curl]} )); then
-    curl -fsSL --create-dirs -o ${ZIM_HOME}/zimfw.zsh https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh
-  else
-    mkdir -p ${ZIM_HOME} && wget -nv -O ${ZIM_HOME}/zimfw.zsh https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh
-  fi
+  curl -fsSL --create-dirs -o ${ZIM_HOME}/zimfw.zsh https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh
 fi
-# Install missing modules, and update ${ZIM_HOME}/init.zsh if missing or outdated.
-if [[ ! ${ZIM_HOME}/init.zsh -nt ${ZDOTDIR:-${HOME}}/.zimrc ]]; then
+if [[ ! ${ZIM_HOME}/init.zsh -nt ${ZIM_CONFIG_FILE:-${ZDOTDIR:-${HOME}}/.zimrc} ]]; then
   source ${ZIM_HOME}/zimfw.zsh init -q
 fi
-# Initialize modules.
 source ${ZIM_HOME}/init.zsh
 
 # ------------------------------
@@ -116,49 +96,36 @@ source ${ZIM_HOME}/init.zsh
 # zsh-history-substring-search
 #
 
-zmodload -F zsh/terminfo +p:terminfo
-# Bind ^[[A/^[[B manually so up/down works both before and after zle-line-init
-for key ('^[[A' '^P' ${terminfo[kcuu1]}) bindkey ${key} history-substring-search-up
-for key ('^[[B' '^N' ${terminfo[kcud1]}) bindkey ${key} history-substring-search-down
-for key ('k') bindkey -M vicmd ${key} history-substring-search-up
-for key ('j') bindkey -M vicmd ${key} history-substring-search-down
-unset key
-
-# Navi
-export NAVI_FZF_OVERRIDES="--layout=reverse --tiebreak=begin --height=${FZF_TMUX_HEIGHT:=$(( lines > LINES / 3 * 2 ? LINES / 3 * 2 : lines ))} --color=hl:075,hl+:075,bg+:025 --ansi --delimiter=\x00 --cycle"
-eval "$(navi widget zsh)"
-
-# fzf (completion with ? and CTRL+T)
-export FZF_COMPLETION_TRIGGER='?'
-export FZF_DEFAULT_OPTS="--layout=reverse --tiebreak=begin --height=${FZF_TMUX_HEIGHT:=$(( lines > LINES / 3 * 2 ? LINES / 3 * 2 : lines ))} --color=hl:075,hl+:075,bg+:025 --ansi --delimiter=\x00 --cycle"
-_fzf_compgen_path() { fd --hidden --follow --exclude ".git" . "$1" }
-_fzf_compgen_dir() { fd --type d --hidden --follow --exclude ".git" . "$1" }
-source "$(fzf-share)/key-bindings.zsh"
-source "$(fzf-share)/completion.zsh"
+# zmodload -F zsh/terminfo +p:terminfo
+## Bind ^[[A/^[[B manually so up/down works both before and after zle-line-init
+# for key ('^[[A' '^P' ${terminfo[kcuu1]}) bindkey ${key} history-substring-search-up
+# for key ('^[[B' '^N' ${terminfo[kcud1]}) bindkey ${key} history-substring-search-down
+# unset key
 
 # Zoxide
-export _ZO_EXCLUDE_DIRS= # $HOME:$HOME/private/*:
+# export _ZO_EXCLUDE_DIRS= # $HOME:$HOME/private/*:
 eval "$(zoxide init zsh --hook prompt)"
 
 # The FUCK?!
-eval $(thefuck --alias f)
-export THEFUCK_REQUIRE_CONFIRMATION="false"
+eval $(thefuck --alias f --yeah)
 
-#
-# Mise
-#
+# Direnv
+eval "$(direnv hook zsh)"
 
-eval "$(mise activate zsh)"
-export GOPATH=$HOME/Workspace/go/
-export PATH="$PATH:$GOPATH/bin:$GOROOT/bin"
+# Weechat
+export WEECHAT_HOME=~/.config/weechat 
 
-({
-  mise use -g node
-  mise use -g go
-} 2>&1 > /dev/null &)
+# -----------------
+# Starship
+# -----------------
 
-###############################################################################
-###############################################################################
+# Load starship
+eval "$(starship init zsh)"
+
+if [ -n "${ZSH_PROF+1}" ]; then
+    zprof
+fi
+
 ###############################################################################
 
 # Editors
@@ -177,28 +144,14 @@ alias find=fd
 alias dig=dog
 alias cat=bat
 
-## Tmux
-alias tmux-re='tmux source ~/.config/tmux/tmux.conf'
-tmux-ti() { echo -ne "\033k$1\007" } # sets the title of the tab/window
-
-## Weechat
-export WEECHAT_HOME=~/.config/weechat 
-
-###############################################################################
-
+# Shortcuts
 if [[ $OSTYPE == 'darwin'* ]]; then
-  # Arch switch
   alias intel="env /usr/bin/arch -x86_64 /bin/zsh"
   alias arm="env /usr/bin/arch -arm64 /bin/zsh"
 else
-  # Shortcuts
   alias s="systemctl"
   alias sr="systemctl daemon-reload"
   alias j="journalctl"
   alias s="sudo --preserve-env=PATH env"
   alias d="sudo docker"
 fi
-
-###############################################################################
-
-(( ! ${+functions[p10k]} )) || p10k finalize

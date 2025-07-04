@@ -8,7 +8,11 @@
   ...
 }: {
   # Nix Daemon & Nix auto-update.
-  system.stateVersion = 4;
+  nix.enable = false; # we use Determinate instead of nix-darwin's management
+  system = {
+    stateVersion = 4;
+    primaryUser = user;
+  };
 
   # Fonts
   fonts.packages = with pkgs; [meslo-lgs-nf];
@@ -22,6 +26,7 @@
   # Homebrew
   homebrew = {
     enable = true;
+    taps = import ../conf/pkgs/taps.nix { inherit isPro; };
     brews = import ../conf/pkgs/brews.nix { inherit isPro; };
     casks = import ../conf/pkgs/casks.nix { inherit isPro; };
     masApps = import ../conf/pkgs/mas.nix { inherit isPro; };
@@ -40,6 +45,7 @@
       showhidden = false;
       show-recents = true;
       persistent-apps = import ../conf/pkgs/dock.nix { inherit isPro; };
+      # fan display / sorting: https://github.com/nix-darwin/nix-darwin/issues/982
       persistent-others = [
         "/Users/${user}/Downloads/"
       ];
@@ -74,7 +80,7 @@
 
   # Add ability to used TouchID for sudo authentication
   # Requires the pam_reattach brew package for tmux
-  security.pam.enableSudoTouchIdAuth = true;
+  security.pam.services.sudo_local.touchIdAuth = true;
 
   # While already set in home.nix, this line instructs nix-darwin
   # to configure the /etc/zshenv file to load the environment.

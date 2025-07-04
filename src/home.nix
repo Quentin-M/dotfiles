@@ -8,6 +8,30 @@
   ...
 }: let
   packages = with pkgs; [
+    # zsh/starship/zim requirements
+    starship
+    pandoc
+    mdcat
+    bat
+    bat-extras.batman
+    bat-extras.batgrep
+    bat-extras.batdiff
+    bat-extras.batwatch
+    bat-extras.prettybat
+    fzf
+    delta
+    choose
+    tree-sitter
+    zoxide
+    grc
+
+    # nvim requirements
+    nixd
+    alejandra
+    deadnix
+    statix
+
+    # we like gnu tools
     coreutils # sha256sum, base64, etc
     moreutils # sponge, parallel
     gawk
@@ -23,32 +47,20 @@
     cmake
     wget
 
-    navi
+    # shell utilities
     tldr
     eza
     fd
-    fzf
     ripgrep
-    bat
-    bat-extras.batman
-    bat-extras.batgrep
-    bat-extras.batdiff
-    bat-extras.batwatch
-    bat-extras.prettybat
     dogdns
     thefuck
-    tree-sitter
-    zoxide
-
     git
-    git-crypt
-    delta
-    choose
     awscli2
     mise
     kubectl
     kubectx
-
+    #devenv
+    direnv
     mtr
     ipcalc
     ipmitool
@@ -57,26 +69,19 @@
     jq
     pgcli
     weechat
-
-    # nvim's nix package
-    nixd
-    alejandra
-    deadnix
-    statix
   ];
 
   packagesNodes = with pkgs.nodePackages; [];
 
-  packagesPython = with pkgs.python310Packages; [
+  packagesPython = with pkgs.python313Packages; [
     pip
-    requests
   ];
 in
   with pkgs; {
     # Home-manager
     programs.home-manager.enable = true;
     home = {
-      stateVersion = "24.05";
+      stateVersion = "25.05";
       packages = packages ++ packagesNodes ++ packagesPython;
     };
 
@@ -91,15 +96,17 @@ in
         export ZSH_CACHE_DIR=~/.cache
         export LANG=en_US.UTF-8
       '';
-      initExtra = builtins.readFile ../conf/zsh/zshrc;
+      enableCompletion = false;
+      initContent = builtins.readFile ../conf/zsh/zshrc;
     };
     xdg.configFile."zsh/.zimrc".source = ../conf/zsh/zimrc;
-    xdg.configFile."zsh/.p10k.zsh".source = ../conf/zsh/p10k.zsh;
+    xdg.configFile."starship.toml".source = ../conf/zsh/starship.toml;
+    home.file.".hushlogin".text = "";
 
     # Tmux
     programs.tmux = {
       enable = true;
-      extraConfig = builtins.readFile ../conf/tmux.conf;
+      extraConfig = builtins.readFile ../conf/zsh/tmux.conf;
     };
     home.file.".tmux/plugins/tpm" = {
       source = builtins.fetchGit {
@@ -144,12 +151,6 @@ in
       forwardAgent = true;
       compression = true;
       matchBlocks = {
-        "*.bitmex.vpn *.bitmex.ad" = {
-          user = "qmachu";
-          extraOptions = {
-            Include = "~/.step/ssh/includes";
-          };
-        };
         "*" = {
           extraOptions = {
             IdentityAgent = "\"~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock\"";

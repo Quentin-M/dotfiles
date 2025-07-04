@@ -11,7 +11,7 @@ repl:
 
 switch:
 	@if [[ $${OSTYPE} == 'darwin'* ]]; then \
-		darwin-rebuild switch --flake $${HOME}/.config/nixpkgs; \
+		sudo darwin-rebuild switch --flake $${HOME}/.config/nixpkgs; \
 	else \
 		home-manager switch --flake $${HOME}/.config/nixpkgs; \
 	fi

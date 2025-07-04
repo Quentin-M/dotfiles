@@ -7,7 +7,7 @@
   # Nixpkgs Overlays
   pkgs = import inputs.nixpkgs {
     inherit system;
-    overlays = [inputs.nurpkgs.overlay];
+    overlays = [inputs.nurpkgs.overlays.default];
     config.allowUnfree = true;
   };
 in

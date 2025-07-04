@@ -11,7 +11,7 @@ let
         "visual-studio-code"
         "postico"
         "tableplus"
-        #"1password" (can't launch - was outdated)
+        "1password"
         "1password-cli"
         "raycast"
         "monodraw"

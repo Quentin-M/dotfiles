@@ -4,6 +4,7 @@ let
     home = [
         "/Applications/Brave Browser.app"
         "/System/Applications/Mail.app"
+        "/System/Applications/Calendar.app"
         "/Applications/ChatGPT.app"
         "/Applications/Obsidian.app"
         "/Applications/Visual Studio Code.app"

@@ -4,14 +4,14 @@
       url = "github:nix-community/NUR";
     };
       nixpkgs = {
-      url = "github:NixOS/nixpkgs?ref=release-24.05";
+      url = "github:NixOS/nixpkgs?ref=release-25.05";
     };
     nixdarwin = {
-      url = "github:LnL7/nix-darwin/master";
+      url = "github:LnL7/nix-darwin/nix-darwin-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     homemanager = {
-      url = "github:nix-community/home-manager?ref=release-24.05";
+      url = "github:nix-community/home-manager?ref=release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
