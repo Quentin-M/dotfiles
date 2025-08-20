@@ -24,8 +24,8 @@
     # Outputs
     in {
       darwinConfigurations = {
-        "Quentins-MacBook-Pro" = mkDarwin { user = "quentinmachu"; system = "aarch64-darwin"; isPro = true; };
         "Quentins-MacBook-Air" = mkDarwin { user = "mentalow"; system = "aarch64-darwin"; };
+        "Quentins-MacBook-Air-BitMEX" = mkDarwin { user = "quentin.machu-ext"; system = "aarch64-darwin"; isPro = true; };
       };
       homeConfigurations = {
         "vagrant" = mkHomeManager { user = "vagrant"; system = "aarch64-linux"; home = "/home/vagrant"; };

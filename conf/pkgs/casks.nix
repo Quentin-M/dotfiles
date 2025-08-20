@@ -6,7 +6,8 @@ let
         "iterm2"
         "tailscale"
         "cleanshot"
-        "chatgpt"
+        "claude-code"
+        "claudia"
         "orbstack"
         "visual-studio-code"
         "postico"
@@ -36,6 +37,7 @@ let
 
     pro = [
       "slack"
+      "amazon-bedrock-client"
     ];
 
 in common ++ (if isPro then pro else home)

@@ -7,6 +7,8 @@ let
       "hashicorp/tap"
     ];
 
-    pro = [];
+    pro = [
+      "didhd/tap" # amazon-bedrock-client
+    ];
 
 in common ++ (if isPro then pro else home)

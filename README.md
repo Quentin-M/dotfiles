@@ -23,4 +23,4 @@ git clone git@github.com:Quentin-M/dotfiles.git ~/.config/nixpkgs
   - Enable its menu bar icon to keep it alive
 - Install CaputccinMocha on VSCode
 
-- iTerm2: Import settings from `conf/iterm2.itermexport`
+- iTerm2: Settings > General > Settings > Import All Settings & Data > `conf/iterm2.itermexport`
