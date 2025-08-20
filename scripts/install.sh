@@ -26,6 +26,8 @@ zsh --login -c "              \
   . ~/.zshenv;                \
   . ~/.config/zsh/.zshrc;     \
                               \
+  zimfw install               \
+                              \
   fast-theme free;            \
                               \
   echo 'Building fzf-tab...'; \
