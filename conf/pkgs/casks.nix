@@ -38,6 +38,7 @@ let
     pro = [
       "slack"
       "amazon-bedrock-client"
+      "drawio"
     ];
 
 in common ++ (if isPro then pro else home)
