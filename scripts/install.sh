@@ -7,7 +7,8 @@ curl -sSf -L https://install.determinate.systems/nix | sh -s -- install --determ
 # Darwin
 if [[ $OSTYPE == 'darwin'* ]]; then
   sudo rm /etc/nix/nix.conf
-  nix --extra-experimental-features "nix-command flakes" run nix-darwin -- switch --flake .
+  sudo mv /etc/zshenv /etc/zshenv.before-nix
+  sudo nix --extra-experimental-features "nix-command flakes" run nix-darwin -- switch --flake .
 
 # Linux
 else 

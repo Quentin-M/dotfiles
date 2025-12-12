@@ -4,10 +4,9 @@ let
     common = [
         "brave-browser"
         "iterm2"
-        "tailscale"
+        "tailscale-app"
         "cleanshot"
         "claude-code"
-        "claudia"
         "orbstack"
         "visual-studio-code"
         "postico"
